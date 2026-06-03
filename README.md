@@ -19,9 +19,7 @@ as possible, chase the high score, restart instantly.
 **Build:** `npm run build` → static `dist/` (deploys to any static host).
 
 <p align="center">
-  <img src="docs/screenshot.png" alt="Stacker gameplay — an isometric tower mid-run" width="46%">
-  &nbsp;&nbsp;
-  <img src="docs/landing.png" alt="Stacker start screen with difficulty selector" width="46%">
+  <img src="docs/landing.png" alt="Stacker start screen with difficulty selector" width="320">
 </p>
 
 Controls: tap / click / **Space** to drop · **hold** to rapid-drop · **← →** to
