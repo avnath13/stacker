@@ -19,6 +19,11 @@ export const CONFIG = {
   // How many tiles to regrow per reward (never exceeds baseSize).
   regrowAmount: 0.7,
 
+  // How long the button must be held before auto-rapid-drop kicks in. This must
+  // be comfortably longer than a normal tap so a single tap never auto-drops a
+  // second block. Once activated, repeats use the per-difficulty holdInterval.
+  holdActivationDelay: 0.32, // seconds
+
   // Camera easing factor (0..1, higher = snappier follow).
   cameraEase: 0.12,
   // Screen-shake decay per second.

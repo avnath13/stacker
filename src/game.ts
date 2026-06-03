@@ -73,10 +73,13 @@ export class Game {
   private tuning: Tuning = DIFFICULTIES.normal;
   private speed: number = DIFFICULTIES.normal.baseSpeed;
 
-  // Hold-to-rapid-drop: while the button is held during play, auto-drop every
-  // tuning.holdInterval seconds.
+  // Hold-to-rapid-drop: a tap drops one block on press; only a deliberate hold
+  // (longer than CONFIG.holdActivationDelay) starts auto-dropping, then repeats
+  // every tuning.holdInterval seconds. `holdActivated` flips once the first
+  // auto-drop fires so a normal tap can never trigger a second block.
   private holding = false;
   private holdTimer = 0;
+  private holdActivated = false;
 
   private score = 0;
   private combo = 0;
@@ -163,10 +166,12 @@ export class Game {
   private onPress(): void {
     unlockAudio();
     if (this.state === "playing") {
-      // Drop now, then begin the hold timer so continued holding auto-drops.
+      // Drop now, then arm the hold timer. Auto-drop only starts after a
+      // deliberate hold, so a quick tap drops exactly one block.
       this.drop();
       this.holding = true;
       this.holdTimer = 0;
+      this.holdActivated = false;
     } else {
       // From menu/game-over a press just (re)starts; this same gesture must not
       // immediately auto-drop, so we leave `holding` false until the next press.
@@ -208,6 +213,7 @@ export class Game {
     this.speed = this.tuning.baseSpeed;
     this.holding = false;
     this.holdTimer = 0;
+    this.holdActivated = false;
     this.spawnMoving();
     this.hud.menuEl.classList.add("hidden");
     this.hud.gameoverEl.classList.add("hidden");
@@ -367,10 +373,16 @@ export class Game {
     // Active block: either auto-rapid-drop while held, or slide normally.
     if (this.state === "playing" && this.moving) {
       if (this.holding) {
-        // Hold-to-rapid-drop: freeze the slide and auto-drop on a cadence.
+        // Hold-to-rapid-drop: freeze the slide and auto-drop on a cadence. The
+        // first auto-drop waits the longer activation delay so a normal tap
+        // (which releases well before then) never fires a second block.
         this.holdTimer += dt;
-        if (this.holdTimer >= this.tuning.holdInterval) {
+        const threshold = this.holdActivated
+          ? this.tuning.holdInterval
+          : CONFIG.holdActivationDelay;
+        if (this.holdTimer >= threshold) {
           this.holdTimer = 0;
+          this.holdActivated = true;
           this.autoDrop();
         }
       } else {
