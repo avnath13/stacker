@@ -2,13 +2,20 @@
 
 > Stack the blocks, nail the perfect drop, build the tallest tower you can — a tiny, addictive arcade game that runs entirely in your browser.
 
+[![Live Demo](https://img.shields.io/badge/play-live%20demo-brightgreen?style=flat-square)](https://play-stacker.vercel.app)
+[![Deployed on Vercel](https://img.shields.io/badge/deploy-vercel-black?style=flat-square&logo=vercel)](https://play-stacker.vercel.app)
+![TypeScript](https://img.shields.io/badge/typescript-strict-3178c6?style=flat-square&logo=typescript&logoColor=white)
+![Bundle](https://img.shields.io/badge/bundle-~5KB%20gzip-blue?style=flat-square)
+
+**▶ Play it now: [play-stacker.vercel.app](https://play-stacker.vercel.app)**
+
 *Built in under 30 minutes during a tea break.*
 
 A minimal, addictive isometric tower-stacking game for the web. Tap to drop a
 sliding block; overhang gets sliced off and the block shrinks. Survive as long
 as possible, chase the high score, restart instantly.
 
-**Play:** `npm install && npm run dev`, then open the printed localhost URL.
+**Play locally:** `npm install && npm run dev`, then open the printed localhost URL.
 **Build:** `npm run build` → static `dist/` (deploys to any static host).
 
 Controls: tap / click / **Space** to drop · **hold** to rapid-drop · **← →** to
