@@ -81,6 +81,12 @@
         opacity: 0;
         pointer-events: none;
       }
+      /* The decorative idle block is drawn ~72% down the canvas, so anchor the
+         menu UI toward the top to keep the difficulty pills clear of it. */
+      #menu {
+        justify-content: flex-start;
+        padding-top: clamp(48px, 14vh, 160px);
+      }
       .title {
         font-size: clamp(40px, 13vw, 86px);
         font-weight: 800;
